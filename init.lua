@@ -104,15 +104,6 @@ require('lazy').setup({
   },
 
   {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
-  },
-
-  {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
@@ -183,16 +174,28 @@ require('lazy').setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
-{
+  {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
     config = function()
-        require("nvim-surround").setup({
-            -- Configuration here, or leave empty to use defaults
-        })
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
     end
-}
+  },
+  {
+    "rebelot/kanagawa.nvim",
+    config = function()
+      require("kanagawa").setup({
+        vim.cmd.colorscheme 'kanagawa-dragon',
+        -- background = {
+        --   dark = "wave",
+        --   light = "lotus"
+        -- }
+      })
+    end
+  },
 }, {})
 
 -- [[ Setting options ]]
@@ -420,10 +423,13 @@ end
 local servers = {
   -- clangd = {},
   gopls = {},
-  pyright = {},
   -- rust_analyzer = {},
   tsserver = {},
   html = { filetypes = { 'html', 'twig', 'hbs'} },
+
+
+  pyright = {},
+  ruff_lsp ={},
 
   lua_ls = {
     Lua = {
@@ -501,7 +507,7 @@ cmp.setup {
     -- end, { 'i', 's' }),
   },
   sources = {
-   { name = 'nvim_lsp' },
+    { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
 }
